@@ -1,0 +1,357 @@
+//
+// VARIABLES
+// -------------------------------------------------------
+
+$color-bg-page: #fff;
+$color-text: #aaa;
+$color-strong: dimgrey;
+$color-muted: #ccc ;
+$color-lighted: #fff;
+$color-text-shadow: #ccc;
+$logo-shadow: #d0bb94;
+
+$color-btn-text: #fff;
+$color-hover-btn-bg: #222;
+$color-hover-btn-txt: #fff;
+
+$font-size-basic: 100%;
+$font-family-1: 'Kumbh Sans', sans-serif;
+$font-family-2: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+$enable-rounded: true;
+
+//
+//	MIXINS
+// ------------------------------------------------------
+
+// Prepocet na hodnoty EM pre responzivny dizajn!!!
+@function em($size, $context: 16) {
+	@return ($size / $context) + em;
+}
+
+@mixin font-size($size, $context: 16) {
+	font-size: em($size, $context);
+}
+
+
+@mixin box-sizing( $value ) {
+	box-sizing: $value;
+}
+
+
+// pre zmenu sirky MAIN bazena v ktorom su dalsie 3 boxy napr: @include main(em(960));
+@mixin main( $width ) {
+	max-width: $width;
+	margin: 0 auto;
+}
+
+// @include clearfix; tento zapis pridat k rodicovskemu elementu class ktory ma floatovane deti
+@mixin clearfix {
+	&:before,
+	&:after { content: " "; display: table; }
+	&:after { clear: both; }
+}
+
+// --- *** --- VYTVARANIE GOMBIKOV --- *** ---
+// prva mozno => @mixin buttons potom sa vpisuje @include buttons;
+// druha => .buttons => @extend .buttons;
+// tretia => %buttons => @extend %buttons;
+%buttons {
+        font: {
+            size: em(14); // pozor zmenil sa font-size z default na 14px!!!
+            family: $font-family-2;
+            weight: bold;
+        }
+        text: {
+            decoration: none;
+            transform: uppercase;
+        }
+    padding: em(16, 14) em(27, 14); //prepocitava sa tak so zmenenou hodnotou font-size
+    margin-right: em(30, 14);
+    letter-spacing: em(3, 14);
+
+    color: $color-btn-text;
+    
+    border-radius: em(7, 14);
+}
+
+// --- nastavenie zaoblenia prvkov tam kde sa povoli cez => @include rounded;
+@mixin rounded( $radius: em(30) em(130)) {
+	@if ( $enable-rounded ) {
+		border-radius: $radius;
+	}
+}
+
+
+// 
+@mixin selection {
+	::-moz-selection { @content; }
+	::-o-selection { @content; }
+	::selection { @content; }
+}
+
+//
+
+html { @include box-sizing(border-box); }
+*, *:before, *:after { box-sizing: inherit; }
+
+// vykreslenie hranic elementov
+//*{outline: 2px solid black;}
+
+// CODE
+
+body {
+    margin: 0 auto;
+
+    background-color: $color-bg-page;
+    color: $color-text;
+
+    font-family: $font-family-1;
+    font-size: $font-size-basic;
+
+    line-height: em(26);
+    text-align: center;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+	max-width: 100%;
+    height: auto;
+    
+    @include rounded;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: {
+            left: em(30);
+            right: em(30);
+    }
+    a {
+        padding-right: em(30);
+    } 
+    
+}
+
+.cup {
+    
+    -webkit-filter: grayscale(100%);
+    
+            filter: grayscale(100%);
+    width: em(88);
+    height: auto;
+    transform: scale(0.8);
+    transition: .3s ease-in-out;
+    border: em(5) solid #6f4e37;
+    border-radius:50%;
+}
+
+.cup:hover {
+    transform: scale(1);
+    -webkit-filter: grayscale(0%);
+            filter: grayscale(0%);
+    box-shadow: 0 0 0.313em $logo-shadow,
+                0 0 1.563em $logo-shadow,
+                0 0 3.125em $logo-shadow,
+                0 0 6.25em $logo-shadow;
+}
+
+header {
+    margin: em(55) auto em(40);
+    letter-spacing: em(2);
+        h1 {
+            font-size: em(35);
+        }
+        span {
+            color: $color-strong;
+        }
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+ 
+div {
+    max-width: em(350);
+    margin: em(20);
+    padding-top: em(30);
+    border: {
+        top: em(1) solid $color-text;
+        bottom: em(1) solid $color-text;
+    }
+        h1 {
+            font-size: em(24);
+            text-shadow: em(1) em(1) $color-text-shadow;
+            color: $color-strong;
+        } 
+}
+
+section {
+    margin: em(20) auto em(30);
+    padding: em(30);
+}
+
+// ----------- cyklus @each pre zmenu background textov v div ------------
+$part-colors: ( 'part1': $color-lighted,
+                //'main':#fff,
+                'part2': $color-lighted,
+                'part3': $color-lighted );
+                
+    @each $part, $color in $part-colors {
+        .#{$part} {
+           background-color: $color; 
+        }
+    }
+
+// 1. premenne farieb pre buttons
+// 2. cyklus vytvorenia btn aj so zmenou farieb pre jednotlive btn
+$button-colors: (
+    'btn01': lightcoral,
+    'btn02': #bada55
+    );
+    
+    @each $button, $color in $button-colors {
+        .#{$button} {
+
+            background-color: $color;
+
+            @extend %buttons; // plus volanie mixin s zhladom pre buttons.
+            }
+        }
+
+.btn02 {
+    margin-right: 0;
+}
+
+.btn a:hover, 
+.btn a:focus {
+    background-color: $color-hover-btn-bg;
+    transition: all 1.5s;
+}
+
+footer {
+    margin: 0 em(20);
+    padding: 0 em(30);
+
+    border-top: em(1) solid $color-text;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+footer p {
+    font-size: em(11);
+}
+
+// RESPONSIVE MEDIA QUERY!!!
+
+@media (max-width: em(1200)) {
+    main {
+        @include main(em(960));
+
+        padding: em(20);
+
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+    div {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        max-width: 100%;
+        height: auto;
+        border-bottom: none;
+            a {
+                order: 1;
+                flex: 1 100%;
+                margin: 0;
+                padding: 0;
+            }
+            section {
+                order: 2;
+                flex: 1 100%;
+                padding: em(10);
+                margin: 0;
+            }
+    }    
+    div:last-child {
+        padding-bottom: em(30);
+        border-bottom: em(1) solid $color-text;
+    }
+    .btn {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: em(860)) {
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+
+        margin: 0;
+        padding: {
+            top: 0;
+            bottom: em(40);
+        }
+            a {
+                margin: {
+                    right: 0;
+                    bottom: em(10, 14);
+                }
+            }
+    }
+    .btn a:last-child {
+        margin-bottom: 0;
+    }    
+}
+
+@media (max-width: em(800)) {
+    header h1 {
+        font-size: em(30);
+        line-height: em(40, 30);
+        
+        
+        display: block;
+        margin: 0 auto;
+        width: em(380, 30);
+    }
+    main {
+        @include main(100%);
+    }
+    div {
+        display: block;
+            section {
+                max-width: em(350);
+                margin: 0 auto;
+            }  
+    }
+   
+}
+
+@media (max-width: em(600)) {
+    header {
+        flex-flow: row wrap;
+        flex-direction: column;
+            a {
+                padding: 0 0 em(20, 14);
+                margin: 0;
+            }
+            h1 {
+                flex: 1 100%;
+                order: 2;
+            }
+            img {
+                flex: 1 100%;
+                order: 1;
+            }
+        }
+}

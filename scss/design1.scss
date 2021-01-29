@@ -1,0 +1,410 @@
+//
+// VARIABLES
+// -------------------------------------------------------
+
+$color-bg-page: lightgrey;
+$color-bg-light: #fff;
+$color-bg-dark: #222;
+
+$text-active: #bb2475;
+$color-text-nav: #bb2475;
+$color-bg-foot: #222;
+
+$color-text-light: #fff;
+$color-text-dark: #222;
+
+$color-hover-btn-bg: lightcoral;
+
+$font-size-basic: 100%;
+$font-family-1: 'Kumbh Sans', sans-serif;
+$font-family-2: 'Source Sans Pro', sans-serif;
+
+$enable-rounded: true;
+
+//
+//	MIXINS
+// ------------------------------------------------------
+
+// Prepocet na hodnoty EM pre responzivny dizajn!!!
+@function em($size, $context: 16) {
+	@return ($size / $context) + em;
+}
+
+@mixin font-size($size, $context: 16) {
+	font-size: em($size, $context);
+}
+
+// ----- BOX-SIZING -----
+@mixin box-sizing( $value ) {
+	box-sizing: $value;
+}
+
+
+// pre zmenu sirky MAIN bazena v ktorom su dalsie 3 boxy
+@mixin main( $width ) {
+	max-width: $width;
+	margin: 0 auto;
+}
+
+// @include clearfix; tento zapis pridat k rodicovskemu elementu class ktory ma FLOAT-ovane deti
+@mixin clearfix {
+	&:before,
+	&:after { content: " "; display: table; }
+	&:after { clear: both; }
+}
+
+// --- *** --- VYTVARANIE GOMBIKOV --- *** ---
+// prva mozno => @mixin buttons potom sa vpisuje @include buttons;
+// druha => .buttons => @extend .buttons;
+// tretia => %buttons => @extend %buttons;
+%buttons { 
+    font: {
+        size: em(17);
+        weight: 700;
+    }
+    text-decoration: none;
+    background: $color-bg-dark;
+    color: $color-text-light;
+    text-transform: uppercase;
+    border-radius: em(7, 17);
+    padding: em(15, 17) em(20, 17);
+    cursor: pointer;
+        &:hover {
+            color: $color-text-light;
+            background: $color-hover-btn-bg;
+            transition: 1.5;
+        }
+}
+
+// --- nastavenie zaoblenia prvkov tam kde sa povoli cez => @include rounded;
+@mixin rounded( $radius: em(6) ) {
+	@if ( $enable-rounded ) {
+		border-radius: $radius;
+	}
+}
+
+// ----- piuzitie mixinu BOX-SIZING -----
+html { 
+    @include box-sizing(border-box); 
+}
+*, *:before, *:after { box-sizing: inherit; }
+
+// vykreslenie hranic elementov
+
+//*{outline: 2px solid black;}
+
+// CODE
+
+body {
+    margin: 0 auto;
+    background-color: $color-bg-page;
+    font: {
+        family: $font-family-2;
+        size: $font-size-basic;
+    }
+    line-height: em(26);
+    text-align: center;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+	max-width: 100%;
+    height: auto;
+}
+
+.hlava {
+    background-color: $color-bg-light;
+    margin: 0;
+    padding: em(30) em(30) em(20);
+    text-align: center;
+        a {
+            text-decoration: none;
+            color: $color-bg-dark;
+        }
+}
+
+.topic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+        h1 {
+            font-size: em(47);
+            margin-bottom: em(15);
+            letter-spacing: em(3, 47);
+        }
+}
+
+.notes {
+    -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+    transform: scale(0.5);
+    transition: all 0.3s linear;
+        &:hover {
+                transform: scale(0.7);
+                -webkit-filter: grayscale(0%);
+                        filter: grayscale(0%);
+                }
+}
+
+.menu {
+        margin: 0;
+        list-style: none;
+        padding-left: none; 
+            li, a {
+                display: inline-block;
+                text-decoration: none;
+                font: {
+                    size: em(14);
+                    style: italic;
+                    weight: 600;
+                }
+                letter-spacing: em(2);
+                padding: em(3) em(23);
+                margin: 0 em(3);
+            }
+            .active a, a:hover, a:focus{
+                color: $text-active;display: block;
+                background-color: $color-bg-page;
+                border-radius: em(3, 14);
+                .home & {
+                    color: $text-active;
+                }
+                .dropdown & {
+                    color: $text-active;
+                }
+                .leftsidebar & {
+                    color: $text-active;
+                }
+                .rightsidebar & {
+                    color: $text-active;
+                }
+                .nosidebar & {
+                    color: $text-active;
+                }
+            }
+    }
+
+
+main {
+    @include main(em(960));
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding: {
+        top: em(80);
+        bottom: em(100);
+        left: em(20);
+        right: em(20);
+    }
+}
+
+article {
+    order: 1;
+    flex: 2;
+
+    background-color: $color-bg-light;
+    margin-right: em(40);
+        section {
+            text-align: left;
+            padding: 35px 25px;
+                h1:first-child {
+                    font-size: em(50);
+                    margin-top: 0;
+                }
+        }
+}
+
+aside {
+    order: 2;
+    flex: 1;
+        div {
+            background-color: $color-bg-light;
+                &:last-child {
+                    margin-top: em(40);
+                    padding: em(20) em(20) em(50);
+                        p {
+                            margin-bottom: em(40);
+                        }
+                }
+                nav {
+                    margin-bottom: em(50);
+                        ul {
+                            //font-size: em(14);
+                            padding-left: em(20);
+                            text-align: left;
+                            line-height: em(30);
+                            color: $color-text-nav;
+                                li {
+                                    padding: 0;
+                                }
+                                a {
+                                    text-decoration: none;
+                                }
+                        }
+                }   
+        }
+        section {
+            padding: em(0) em(20) em(50);
+                p {
+                    margin-bottom: em(40);
+                }
+        } 
+}
+
+.btn {
+   @extend %buttons;
+}
+
+.foot {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+
+    background-color: $color-bg-foot;
+    color: $color-text-nav;
+    
+    margin: 0;
+    padding-left: 0; /* ul elementy maju same od seba lavy padding, zrusime */
+    text-align: left;
+    /*list-style: none; /* toto zrusi tie bodky v zoznamoch */
+    ul {
+        margin: {
+            left: em(50);
+            right: em(50);
+            }
+            a {
+                text-decoration: none;
+                color: $color-text-nav;
+                &:hover{
+                    color: #bada55;
+                }
+            }
+               
+    }
+    p {
+        font-size: em(12);
+        order: 4;
+        flex: 1 100%;
+        text-align: right;
+        border-top: 1px solid $color-text-nav;
+        margin: em(20) em(30) em(10);
+        padding: em(5) em(30) em(0);
+    }  
+
+}
+
+@media (max-width: em(1150)) {
+    .foot {
+        font-size: em(13);
+            p {
+                font-size: em(12, 13);
+            }
+    }
+    
+}
+
+@media (max-width: em(980)) {
+    aside {
+        font-size: em(13);
+    }
+    footer ul {
+        padding-left: 0;
+    }
+    
+}
+
+@media (max-width: em(850)) {
+    main {
+        flex-flow: row wrap;
+    }
+
+    article {
+        order: 1;
+        flex: 1 100%;
+        max-width: 100%;
+        margin: 0 0 em(20);
+    }
+
+    aside {
+        order: 2;
+        flex: 1 100%;
+        font-size: $font-size-basic;
+        
+        display: flex;
+        &>* {flex: 1;}
+            div {
+                order: 1;
+                max-width: 48.5%;
+                margin-right: 3%;
+                &:last-child {
+                    order: 2;
+                    max-width: 48.5%;
+                    margin-top: 0;
+                    margin-right: 0;
+                }    
+            }
+    }
+    
+    .foot {
+        font-size: em(12);
+            p {
+                font-size: em(12, 12);
+            }
+    }
+
+    .menu {
+        ul {
+            padding-left: 0;
+        }
+        li {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            max-width: em(300);
+        }
+    }
+}
+
+@media (max-width: em(800)) {
+    .foot {
+        font-size: 100%;
+        display: block;
+        padding-top: em(20);
+            p {
+                font-size: em(12, 16);
+                padding: em(5) em(20);
+                margin-bottom: 0;
+            }
+        }
+}
+
+@media (max-width: em(700)) {
+    aside {
+        font-size: em(13);
+    }
+}
+
+@media (max-width: em(650)) {
+    .topic h1 {
+        font-size: em(30);
+    }
+    aside {
+        font-size: $font-size-basic;
+        flex-flow: row wrap;
+            div {
+                order: 1;
+                flex: 1 100%;
+                max-width: 100%;
+                margin: 0 0 em(20);
+                    &:last-child {
+                        order: 2;
+                        flex: 1 100%;
+                        max-width: 100%;
+                    }
+            }
+    }
+}

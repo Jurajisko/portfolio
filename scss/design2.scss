@@ -1,0 +1,230 @@
+//
+// VARIABLES
+// -------------------------------------------------------
+
+$color-bg-page: #f3ede8;
+$color-bg-light: #fff;
+$color-bg-dark: #222;
+$logo-shadow: dimgrey;
+
+$color-text-light: #fff;
+$color-text-dark: #222;
+
+$font-size-basic: 100%;
+$font-family: 'EB Garamond', serif;
+$font-family-2: 'Kumbh Sans', sans-serif;
+
+$enable-rounded: true;
+
+//
+//	MIXINS
+// ------------------------------------------------------
+
+// Prepocet na hodnoty EM pre responzivny dizajn!!!
+@function em($size, $context: 16) {
+	@return ($size / $context) + em;
+}
+
+@mixin font-size($size, $context: 16) {
+	font-size: em($size, $context);
+}
+
+// ----- BOX-SIZING -----
+@mixin box-sizing( $value ) {
+	box-sizing: $value;
+}
+
+
+// pre zmenu sirky MAIN bazena v ktorom su dalsie 3 boxy
+@mixin main( $width ) {
+	max-width: $width;
+	margin: 0 auto;
+}
+
+// @include clearfix; tento zapis pridat k rodicovskemu elementu class ktory ma FLOAT-ovane deti
+@mixin clearfix {
+	&:before,
+	&:after { content: " "; display: table; }
+	&:after { clear: both; }
+}
+
+// --- *** --- VYTVARANIE GOMBIKOV --- *** ---
+// prva mozno => @mixin buttons potom sa vpisuje @include buttons;
+// druha => .buttons => @extend .buttons;
+// tretia => %buttons => @extend %buttons;
+%buttons { 
+    font: {
+        size: em(12);
+        weight: 700;
+        font-family: $font-family;
+    }
+    letter-spacing: em(2);
+    text-decoration: none;
+    background: none;
+    color: $color-text-dark;
+    text-transform: uppercase;
+    border-radius: em(7, 17);
+    padding: em(15, 17) em(20, 17);
+    cursor: pointer;
+        &:hover {
+            color: $color-text-light;
+            background: $color-bg-dark;
+            transition: all 1.5;
+        }
+}
+
+// --- nastavenie zaoblenia prvkov tam kde sa povoli cez => @include rounded;
+@mixin rounded( $radius: em(6) ) {
+	@if ( $enable-rounded ) {
+		border-radius: $radius;
+	}
+}
+
+// ----- piuzitie mixinu BOX-SIZING -----
+html { 
+    @include box-sizing(border-box); 
+}
+*, *:before, *:after { box-sizing: inherit; }
+
+// vykreslenie hranic elementov
+
+/*{outline: 2px solid black;}*/
+
+// CODE
+
+body {
+    
+    background-color: $color-bg-page;
+        font: {
+            family: $font-family;
+            size: $font-size-basic;
+        }
+    line-height: em(26);
+    text-align: left;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    @include main(em(960));
+    padding: em(50) em(20);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: row;
+}
+
+img {
+	max-width: 100%;
+    height: auto;
+}
+
+article {
+    margin-right: em(30);
+    max-width: 60%;
+        div {
+            margin-bottom: em(30);
+        }
+        div:last-child {
+            padding-top: em(20);
+            border-top: em(1) solid $color-text-dark;
+        }
+        h1 {
+            text-transform: uppercase;
+        }
+        p {
+            margin-bottom: em(30)
+        }
+}
+
+.btn {
+    @extend %buttons;
+}
+
+.btn2 {
+    @extend %buttons;
+    letter-spacing: 0;
+    font-weight: normal;
+}
+
+.btn3 {
+    @extend %buttons;
+    display: none;
+}
+
+aside {
+    border-top: em(1) solid $color-text-dark;
+    border-bottom: em(1) solid $color-text-dark;
+    padding-bottom: em(30);
+    h2 {
+        padding-top: em(20);
+        
+        margin-top: 0;
+    }
+    h1 {
+        padding-bottom: em(10);  
+    }
+    section {
+        padding-bottom: em(30);
+        padding-top: em(30);
+        border-top: em(0.5) solid $color-text-dark;
+        border-bottom: em(0.5) solid $color-text-dark;
+    }
+}
+
+.home {
+    float: right;
+    -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+    transform: scale(0.5);
+    transition: all 0.2s linear;
+    &:hover {
+        transform: scale(0.7);
+        -webkit-filter: grayscale(0%);
+                filter: grayscale(0%);
+    }
+}
+
+footer {
+    text-align: right;
+    border-top: em(0.5) solid $color-text-dark;
+    margin: 0 em(20);
+    padding: 0 em(20);
+}
+
+@media (max-width: em(850)) {
+    .btn2 {
+        display: none;
+    }
+    .btn3 {
+        display: block;
+        letter-spacing: 0;
+        font-weight: normal; 
+    }
+}
+
+@media (max-width: em(680)) {
+    main {
+        flex-direction: column;
+    }
+
+    article {
+        order: 2;
+        max-width: 100%;
+        margin-right: 0;
+        padding-top: em(20);
+    }
+
+    aside {
+        order: 1;
+    }
+
+    .btn2 {
+        display: block;
+    }
+    
+    .btn3 {
+        display: none;
+    }
+}
+

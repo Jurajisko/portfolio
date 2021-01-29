@@ -1,0 +1,248 @@
+.btn {
+  font-size: 1.0625em;
+  font-weight: 700;
+  text-decoration: none;
+  background: #222;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 0.41176em;
+  padding: 0.88235em 1.17647em;
+  cursor: pointer; }
+  .btn:hover {
+    color: #fff;
+    background: lightcoral;
+    transition: 1.5; }
+
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body {
+  margin: 0 auto;
+  background-color: lightgrey;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 100%;
+  line-height: 1.625em;
+  text-align: center;
+  -webkit-font-smoothing: antialiased; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+.hlava {
+  background-color: #fff;
+  margin: 0;
+  padding: 1.875em 1.875em 1.25em;
+  text-align: center; }
+  .hlava a {
+    text-decoration: none;
+    color: #222; }
+
+.topic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row; }
+  .topic h1 {
+    font-size: 2.9375em;
+    margin-bottom: 0.9375em;
+    letter-spacing: 0.06383em; }
+
+.notes {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  transform: scale(0.5);
+  transition: all 0.3s linear; }
+  .notes:hover {
+    transform: scale(0.7);
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%); }
+
+.menu {
+  margin: 0;
+  list-style: none;
+  padding-left: none; }
+  .menu li, .menu a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.875em;
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 0.125em;
+    padding: 0.1875em 1.4375em;
+    margin: 0 0.1875em; }
+  .menu .active a, .menu a:hover, .menu a:focus {
+    color: #bb2475;
+    display: block;
+    background-color: lightgrey;
+    border-radius: 0.21429em; }
+    .home .menu .active a, .home .menu a:hover, .home .menu a:focus {
+      color: #bb2475; }
+    .dropdown .menu .active a, .dropdown .menu a:hover, .dropdown .menu a:focus {
+      color: #bb2475; }
+    .leftsidebar .menu .active a, .leftsidebar .menu a:hover, .leftsidebar .menu a:focus {
+      color: #bb2475; }
+    .rightsidebar .menu .active a, .rightsidebar .menu a:hover, .rightsidebar .menu a:focus {
+      color: #bb2475; }
+    .nosidebar .menu .active a, .nosidebar .menu a:hover, .nosidebar .menu a:focus {
+      color: #bb2475; }
+
+main {
+  max-width: 60em;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding-top: 5em;
+  padding-bottom: 6.25em;
+  padding-left: 1.25em;
+  padding-right: 1.25em; }
+
+article {
+  order: 1;
+  flex: 2;
+  background-color: #fff;
+  margin-right: 2.5em; }
+  article section {
+    text-align: left;
+    padding: 35px 25px; }
+    article section h1:first-child {
+      font-size: 3.125em;
+      margin-top: 0; }
+
+aside {
+  order: 2;
+  flex: 1; }
+  aside div {
+    background-color: #fff; }
+    aside div:last-child {
+      margin-top: 2.5em;
+      padding: 1.25em 1.25em 3.125em; }
+      aside div:last-child p {
+        margin-bottom: 2.5em; }
+    aside div nav {
+      margin-bottom: 3.125em; }
+      aside div nav ul {
+        padding-left: 1.25em;
+        text-align: left;
+        line-height: 1.875em;
+        color: #bb2475; }
+        aside div nav ul li {
+          padding: 0; }
+        aside div nav ul a {
+          text-decoration: none; }
+  aside section {
+    padding: 0em 1.25em 3.125em; }
+    aside section p {
+      margin-bottom: 2.5em; }
+
+.foot {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  background-color: #222;
+  color: #bb2475;
+  margin: 0;
+  padding-left: 0;
+  /* ul elementy maju same od seba lavy padding, zrusime */
+  text-align: left;
+  /*list-style: none; /* toto zrusi tie bodky v zoznamoch */ }
+  .foot ul {
+    margin-left: 3.125em;
+    margin-right: 3.125em; }
+    .foot ul a {
+      text-decoration: none;
+      color: #bb2475; }
+      .foot ul a:hover {
+        color: #bada55; }
+  .foot p {
+    font-size: 0.75em;
+    order: 4;
+    flex: 1 100%;
+    text-align: right;
+    border-top: 1px solid #bb2475;
+    margin: 1.25em 1.875em 0.625em;
+    padding: 0.3125em 1.875em 0em; }
+
+@media (max-width: 71.875em) {
+  .foot {
+    font-size: 0.8125em; }
+    .foot p {
+      font-size: 0.92308em; } }
+
+@media (max-width: 61.25em) {
+  aside {
+    font-size: 0.8125em; }
+  footer ul {
+    padding-left: 0; } }
+
+@media (max-width: 53.125em) {
+  main {
+    flex-flow: row wrap; }
+  article {
+    order: 1;
+    flex: 1 100%;
+    max-width: 100%;
+    margin: 0 0 1.25em; }
+  aside {
+    order: 2;
+    flex: 1 100%;
+    font-size: 100%;
+    display: flex; }
+    aside > * {
+      flex: 1; }
+    aside div {
+      order: 1;
+      max-width: 48.5%;
+      margin-right: 3%; }
+      aside div:last-child {
+        order: 2;
+        max-width: 48.5%;
+        margin-top: 0;
+        margin-right: 0; }
+  .foot {
+    font-size: 0.75em; }
+    .foot p {
+      font-size: 1em; }
+  .menu ul {
+    padding-left: 0; }
+  .menu li {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 18.75em; } }
+
+@media (max-width: 50em) {
+  .foot {
+    font-size: 100%;
+    display: block;
+    padding-top: 1.25em; }
+    .foot p {
+      font-size: 0.75em;
+      padding: 0.3125em 1.25em;
+      margin-bottom: 0; } }
+
+@media (max-width: 43.75em) {
+  aside {
+    font-size: 0.8125em; } }
+
+@media (max-width: 40.625em) {
+  .topic h1 {
+    font-size: 1.875em; }
+  aside {
+    font-size: 100%;
+    flex-flow: row wrap; }
+    aside div {
+      order: 1;
+      flex: 1 100%;
+      max-width: 100%;
+      margin: 0 0 1.25em; }
+      aside div:last-child {
+        order: 2;
+        flex: 1 100%;
+        max-width: 100%; } }

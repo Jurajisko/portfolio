@@ -1,0 +1,112 @@
+.btn, .btn2, .btn3 {
+  font-size: 0.75em;
+  font-weight: 700;
+  font-font-family: "EB Garamond", serif;
+  letter-spacing: 0.125em;
+  text-decoration: none;
+  background: none;
+  color: #222222;
+  text-transform: uppercase;
+  border-radius: 0.41176em;
+  padding: 0.88235em 1.17647em;
+  cursor: pointer; }
+  .btn:hover, .btn2:hover, .btn3:hover {
+    color: white;
+    background: #222222;
+    transition: all 1.5; }
+
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+/*{outline: 2px solid black;}*/
+body {
+  background-color: #f3ede8;
+  font-family: "EB Garamond", serif;
+  font-size: 100%;
+  line-height: 1.625em;
+  text-align: left;
+  -webkit-font-smoothing: antialiased; }
+
+main {
+  max-width: 60em;
+  margin: 0 auto;
+  padding: 3.125em 1.25em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+article {
+  margin-right: 1.875em;
+  max-width: 60%; }
+  article div {
+    margin-bottom: 1.875em; }
+  article div:last-child {
+    padding-top: 1.25em;
+    border-top: 0.0625em solid #222222; }
+  article h1 {
+    text-transform: uppercase; }
+  article p {
+    margin-bottom: 1.875em; }
+
+.btn2 {
+  letter-spacing: 0;
+  font-weight: normal; }
+
+.btn3 {
+  display: none; }
+
+aside {
+  border-top: 0.0625em solid #222222;
+  border-bottom: 0.0625em solid #222222;
+  padding-bottom: 1.875em; }
+  aside h2 {
+    padding-top: 1.25em;
+    margin-top: 0; }
+  aside h1 {
+    padding-bottom: 0.625em; }
+  aside section {
+    padding-bottom: 1.875em;
+    padding-top: 1.875em;
+    border-top: 0.03125em solid #222222;
+    border-bottom: 0.03125em solid #222222; }
+
+footer {
+  text-align: right;
+  border-top: 0.03125em solid #222222;
+  margin: 0 1.25em;
+  padding: 0 1.25em; }
+
+@media (max-width: 53.125em) {
+  .btn2 {
+    display: none; }
+
+  .btn3 {
+    display: block;
+    letter-spacing: 0;
+    font-weight: normal; } }
+@media (max-width: 42.5em) {
+  main {
+    flex-direction: column; }
+
+  article {
+    order: 2;
+    max-width: 100%;
+    margin-right: 0;
+    padding-top: 1.25em; }
+
+  aside {
+    order: 1; }
+
+  .btn2 {
+    display: block; }
+
+  .btn3 {
+    display: none; } }

@@ -1,0 +1,32 @@
+*{outline: 2px solid blue;}
+
+
+main {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.team_row1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   /* flex-direction: row;*/
+    flex-wrap: wrap;
+}
+
+
+.flip-card {
+    width: 30%;
+    text-align: center;
+    margin: 0 1.5%;      
+}
+.flex-card:first-child{
+    margin-left: 0;
+}
+.flex-card:last-child{
+    margin-right: 0;
+}
+
+.member {
+    border-radius: 3px;
+}

@@ -1,0 +1,503 @@
+//
+// VARIABLES
+// -------------------------------------------------------
+
+$color-bg-page: #fff;
+$color-bg-light: lightgrey;
+$color-bg-dark: #222;
+
+$color-bg-head: red;
+$color-bg-head-opacity: rgba(255, 0, 0, 0.278);
+$color-bg-foot: #CD1400;
+
+$color-text-light: #fff;
+$color-text-dark: #222;
+
+$color-hover-btn-bg: lightcoral;
+
+$font-size-basic: 100%;
+$font-family-1: 'Kumbh Sans', sans-serif;
+$font-family-2: 'Source Sans Pro', sans-serif;
+$font-family-3: 'Raleway', sans-serif;
+
+$enable-rounded: true;
+
+//
+//	MIXINS
+// ------------------------------------------------------
+
+// Prepocet na hodnoty EM pre responzivny dizajn!!!
+@function em($size, $context: 16) {
+	@return ($size / $context) + em;
+}
+
+@mixin font-size($size, $context: 16) {
+	font-size: em($size, $context);
+}
+
+// --- nastavenie zaoblenia prvkov tam kde sa povoli cez => @include rounded;
+@mixin rounded( $radius: em(6) ) {
+	@if ( $enable-rounded ) {
+		border-radius: $radius;
+	}
+}
+
+// pre zmenu sirky MAIN bazena v ktorom su dalsie 3 boxy
+@mixin main( $width ) {
+	max-width: $width;
+	margin: 0 auto;
+}
+
+// --- *** --- VYTVARANIE GOMBIKOV --- *** ---
+// prva mozno => @mixin buttons potom sa vpisuje @include buttons;
+// druha => .buttons => @extend .buttons;
+// tretia => %buttons => @extend %buttons;
+%buttons {
+    font: {
+        size: em(17);
+        weight: 700;
+    }
+    text-decoration: none;
+    background: $color-bg-dark;
+    color: $color-text-light;
+    text-transform: uppercase;
+
+    border-radius: em(7, 17);
+    padding: em(15, 17) em(20, 17);
+    cursor: pointer;
+    transition: all 1.3s;
+        &:hover {
+            color: $color-text-light;
+            background: $color-hover-btn-bg;
+           
+        }
+}
+
+// @include clearfix; tento zapis pridat k rodicovskemu elementu class ktory ma FLOAT-ovane deti
+// !!! pridava sa iba!!! ---> @include clearfix; <--- !!! pridava sa iba !!!
+@mixin clearfix {
+	&:before,
+	&:after { content: " "; display: table; }
+	&:after { clear: both; }
+}
+ 
+// ----- BOX-SIZING ----- $value ---> (border-box); alebo (content-box);
+@mixin box-sizing( $value ) {
+	box-sizing: $value;
+}
+
+// ----- piuzitie mixinu BOX-SIZING -----
+html { 
+    @include box-sizing(border-box); 
+}
+*, *:before, *:after { box-sizing: inherit; }
+
+// vykreslenie hranic elementov
+
+/*{outline: 2px solid black;}*/
+
+// CODE
+
+body {
+    margin: 0 auto;
+    background-color: $color-bg-page;
+        font: {
+            family: $font-family-3;
+            size: $font-size-basic;
+        }
+    line-height: em(26);
+    text-align: center;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+	max-width: 100%;
+    height: auto;
+}
+
+
+header {
+    @include clearfix;
+    background: url('../img/web22.jpg') center center no-repeat;
+    background-size: cover;
+    position: relative;
+        span {
+            color: #EFC958;
+        }  
+}
+
+.menu {
+    background-color: $color-bg-head;
+    background-color: $color-bg-head-opacity;
+    list-style: none;
+    text-align: right;
+    font-weight: 700;
+    margin: 0;
+    padding: em(30) em(15) em(30) 0;
+    
+        li, a {
+            padding: em(10) em(20);
+            display: inline-block;
+            text-decoration: none;
+            color: $color-text-light;
+            text-transform: uppercase;
+            letter-spacing: em(1.5);
+        }
+}
+
+.menu a:hover {
+    background-color: $color-bg-dark;
+    color: $color-text-light;
+    border-radius: em(4);
+    transition: all .5s linear;
+}
+
+.design {
+    position: absolute;
+    z-index: 2;
+    top: em(80);
+    left: em(80);
+    -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+    transform: scale(0.8);
+    transition: all 0.3s linear;
+        &:hover {
+                transform: scale(1);
+                -webkit-filter: grayscale(0%);
+                        filter: grayscale(0%);
+                }
+}
+
+
+
+.topic {
+    color: $color-text-light;
+    font-size: em(50);
+    line-height: em(60, 50);
+    margin: {
+        top: em(300, 50);
+        bottom: em(80, 50);
+    }
+    padding: {
+        left: em(20, 50);
+        right: em(20, 50);
+    }
+}
+
+.topic2 {
+    color: $color-text-light;
+    font-size: em(21);
+    padding-bottom: em(300, 21);
+    font-weight: normal;
+}
+
+main {
+    @include clearfix;
+    max-width: em(960);
+    margin: 0 auto;
+    padding: em(20);
+        h2 {
+            text-transform: uppercase;
+            border-bottom: em(2) solid dimgrey;
+            /*margin-left: 60px;
+            margin-right: 60px;*/
+            line-height: em(50);
+        }   
+}
+
+article {
+    section {
+        font-size: em(20);
+        margin: em(50, 20) em(180, 20);
+    }
+}
+
+.logo {
+    margin: 0;
+    padding: 0;
+}
+
+.topic3 {
+    font-size: em(35);
+
+    border-bottom: em(2, 35) solid dimgrey;
+    text-transform: uppercase;
+    margin-left: em(250, 35);
+    margin-right: em(250, 35);
+    line-height: em(50, 35);
+    
+}
+
+aside {
+    .sec1 {
+        float: left;
+        max-width: em(450);
+    }
+    .sec2 {
+        float: right;
+        max-width: em(450);
+    }
+    .note {
+        margin: 0 0 em(40);
+        padding: em(20); 
+    }
+}
+
+footer {
+    @include clearfix;
+    font-size: em(12);
+
+    background-color: $color-bg-foot;
+    color: $color-text-dark;
+    border-top: em(1, 12) solid $color-text-dark;
+    margin: {
+        top: em(80, 12);
+        bottom: 0;
+    }
+        p {
+            float: right;
+            margin: {
+                top: 0;
+                right: em(15, 12);
+            }
+            padding: em(15,12);
+        }
+        a {
+            float: left;
+            margin: {
+                top: 0;
+                left: em(15, 12);
+            }
+            padding: em(15,12);
+            text-decoration: none;
+            color: $color-text-dark;
+        }
+}
+
+
+
+/*
+ * Navigataur: A pure CSS responsive navigation menu
+ * original author: Mike King (@micjamking)
+ * my changes... Jurajisko
+ */
+
+/*
+ 	Notes:
+ 
+ 	- Media queries should be edited in both style sections if you require 
+	  a different breakpoint for your navigation.
+	  
+	- Toggle class & menu anchor tags in list items have box-sizing: border-box 
+	  style property to allow padding inside the container without conflicting with layout.	
+
+*/
+
+
+/*--------------------------------
+ Functional Styles (Required)
+---------------------------------*/
+
+
+#toggle, .toggle { display: none; }
+
+
+/* Nicolas Gallagher micro clearfix */
+
+
+@media only screen and (max-width: em(1150)) {
+	.menu { display: none; opacity: 0; width: 100%; position: absolute; right: 0; }
+	.menu > li { display: block; width: 100%; margin: 0; }
+	.menu > li > a { display: block; width: 100%; text-decoration: none; box-sizing: border-box; }
+    .toggle {
+        display: block;
+        position: relative;
+        cursor: pointer; 
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+	#toggle:checked + div .menu { display: block; opacity: 1;}
+}
+
+
+/*--------------------------------
+ Presentation Styles (Editable)
+---------------------------------*/
+
+@media only screen and (max-width: em(1150)) {
+    .nav {
+        float: right;
+        padding: {
+            top: em(60);
+            right: em(50);
+        } 
+    }
+
+	.menu {
+        max-width: 40%;
+        font-size: $font-size-basic;
+        background-color: $color-bg-head;
+        background-color: $color-bg-head-opacity;
+        border-top: em(3) solid $color-text-dark;
+        text-align: left;
+            li, a {
+                color: $color-text-dark;
+                transition: 0s;
+            }
+    }
+
+    .menu,
+    .menu > li, 
+    .menu > li > a {
+        height: auto;
+    }
+    
+	.menu > li > a {
+        border-bottom: em(1) solid $color-text-dark;
+    }
+    
+	.menu > li > a:hover, .menu > li > a:focus {
+        border-radius: 0;
+        background-color: $color-bg-dark;
+        text-decoration: underline;
+        color: $color-bg-head;
+	}
+	
+	.toggle:after {  
+        font-size: em(12);
+
+        background-color: $color-bg-dark;
+        color: $color-text-light;
+
+		content: attr(data-open);
+		display: block;
+        width: 8.333333333333333em;
+        height: 8.333333333333333em;
+        padding-top: 3.083333333333333em;
+        padding-left: 0.4166666666666667em;
+		
+		border-radius: 50%;
+		text-align: center;
+		
+		transition: all 0.5s linear;
+        box-sizing: border-box;
+        font-family: 'Jura', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5833333333333333em; 
+    }
+    
+	.toggle:hover:after{
+        background: $color-bg-dark;
+        color: $color-bg-head;
+    }
+    
+	#toggle:checked + div .toggle:after{
+        content: attr(data-close);
+        letter-spacing: 0.3333333333333333em; 
+	}
+}
+
+@media only screen and (max-width: em(960)) {
+    
+    main {
+        font-size: em(14);
+    }
+}
+
+@media only screen and (max-width: em(840)) {
+    main {
+        font-size: em(12);
+    }
+    .menu {
+        max-width: 50%;
+    }
+}
+
+@media only screen and (max-width: em(740)) {
+    article section {
+        margin: {
+            left: em(20);
+            right: em(20);
+        }
+    }
+
+    .topic3 {
+        margin: {
+            left: em(50);
+            right: em(50);
+        }
+    }
+
+    aside {
+        .sec1 {
+            float: none;
+            max-width: 100%;
+        }
+        .sec2 {
+            float: none;
+            max-width: em(960);
+        }
+    }
+
+    footer {
+        padding-top: em(20);
+            p {
+                float: none;
+            }
+            a {
+                float: none;
+            }
+    }
+}
+
+
+
+@media only screen and (max-width: em(480)) {
+    .snow {
+        top: em(930);        
+    }
+    .nav {
+        float: none;
+        margin-top: 0;
+        padding: 0;
+    }
+    .design {
+        top: em(900);
+        left: em(30);
+    }
+    .menu {
+        text-align: center;
+        max-width: 100%;
+    }
+	.toggle:after { 
+        text-align: center;
+        padding-top: em(-50);
+        width: 100%;
+        height: 4.166666666666667em;     
+        border-radius: 0;
+        padding-top: 1.25em;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

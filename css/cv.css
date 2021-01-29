@@ -1,0 +1,233 @@
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body {
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 100%;
+  line-height: 1.625em;
+  text-align: center;
+  background-color: #fff;
+  color: #2c3e50;
+  background: url("../img/bckgr1.png") center center no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-font-smoothing: antialiased; }
+
+.about {
+  margin: 1.875em auto;
+  padding: 0 1.875em;
+  max-width: 60em;
+  min-height: 28.125em; }
+
+.menu {
+  display: block;
+  padding-top: 0.625em;
+  padding-bottom: 0.625em;
+  padding-left: 0;
+  font-family: "Amatic SC", cursive;
+  font-size: 1.625em;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase; }
+  .menu ul {
+    padding-left: 0; }
+  .menu li {
+    display: inline-block;
+    padding: 0.625em 1.25em;
+    margin-right: 1.875em;
+    border-radius: 0.1875em; }
+    .menu li:last-child {
+      margin: 0; }
+  .menu a {
+    text-decoration: none;
+    color: #f55d4b; }
+
+.selected {
+  background-color: #f55d4b; }
+  .selected a {
+    color: #fff; }
+
+h1 {
+  font-family: "Amatic SC", cursive;
+  font-size: 3.125em;
+  color: #f55d4b;
+  text-transform: uppercase; }
+
+div {
+  max-width: 60em;
+  margin: 0 auto; }
+  div article {
+    padding-top: 0.625em;
+    text-align: left; }
+    div article p {
+      text-indent: 3.125em; }
+
+#profil p {
+  text-indent: 0;
+  margin-bottom: 0.625em;
+  padding-bottom: 1.25em;
+  border-bottom: 0.0625em solid #2c3e50; }
+  #profil p:last-child {
+    border-bottom: none; }
+
+#kontakt p {
+  color: #2c3e50; }
+
+#kontakt a {
+  text-decoration: none;
+  color: #f55d4b;
+  margin-top: 0.625em;
+  font-family: "Amatic SC", cursive;
+  font-size: 1.25em;
+  font-weight: 700; }
+
+footer a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-family: "Amatic SC", cursive;
+  font-size: 1.25em;
+  font-weight: 700; }
+
+footer {
+  display: relative;
+  margin: 3.125em;
+  padding: 0.625em 1.875em;
+  border-top: 0.0625em solid #2c3e50; }
+  footer:before, footer:after {
+    content: " ";
+    display: table; }
+  footer:after {
+    clear: both; }
+
+.pictlink {
+  float: left; }
+
+.cvlink {
+  float: right; }
+
+/*
+ * Navigataur: A pure CSS responsive navigation menu
+ * original author: Mike King (@micjamking)
+ * my changes... Jurajisko
+ */
+/*
+ 	Notes:
+ 
+ 	- Media queries should be edited in both style sections if you require 
+	  a different breakpoint for your navigation.
+	  
+	- Toggle class & menu anchor tags in list items have box-sizing: border-box 
+	  style property to allow padding inside the container without conflicting with layout.	
+
+*/
+/*--------------------------------
+ Functional Styles (Required)
+---------------------------------*/
+#toggle, .toggle {
+  display: none; }
+
+/* Nicolas Gallagher micro clearfix */
+@media only screen and (max-width: 43.75em) {
+  .menu {
+    display: none;
+    opacity: 0;
+    width: 100%;
+    position: absolute;
+    right: 0; }
+  .menu > li {
+    display: block;
+    width: 100%;
+    margin: 0; }
+  .menu > li > a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    box-sizing: border-box; }
+  .toggle {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+  #toggle:checked + div .menu {
+    display: block;
+    opacity: 1; } }
+
+/*--------------------------------
+ Presentation Styles (Editable)
+---------------------------------*/
+@media only screen and (max-width: 43.75em) {
+  h1 {
+    font-family: "Amatic SC", cursive;
+    font-size: 1.875em;
+    color: #f55d4b;
+    text-transform: uppercase; }
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; }
+    footer a {
+      font-size: 1em; }
+  .pictlink {
+    float: none; }
+  .cvlink {
+    float: none; }
+  .nav {
+    margin-top: 0em; }
+  .menu {
+    text-align: right;
+    max-width: 40%;
+    padding-left: 0;
+    padding-bottom: 0;
+    margin: 0;
+    font-size: 100%;
+    font-weight: 700;
+    background-color: #f55d4b; }
+    .menu li {
+      border-bottom: 0.1875em solid #222; }
+      .menu li:last-child {
+        border-bottom: none; }
+    .menu a {
+      color: #fff;
+      letter-spacing: 0.25em; }
+  /*.menu,
+    .menu > li, 
+    .menu > li > a {
+        height: auto;transition: all 1s linear;
+    }*/
+  /*.menu > li > a {
+        border-bottom: em(1) solid $color-text-light;
+    }*/
+  .menu > li > a:hover, .menu > li > a:focus {
+    border-radius: 0;
+    background-color: #f55d4b;
+    color: #fff;
+    text-decoration: underline; }
+  .toggle:after {
+    content: attr(data-open);
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 1.0625em 0;
+    background-color: #222222;
+    color: #FFFFFF;
+    transition: all 0.5s linear;
+    box-sizing: border-box;
+    font-family: "Amatic SC", cursive;
+    font-size: 1.875em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.21875em; }
+  .toggle:hover:after {
+    color: #f55d4b; }
+  #toggle:checked + div .toggle:after {
+    content: attr(data-close);
+    letter-spacing: 0.375em; } }

@@ -1,0 +1,169 @@
+//
+// VARIABLES
+// -------------------------------------------------------
+
+$color-bg-page: #fff;
+$color-text-dark: #222;
+$color-text-light: #fff ;
+
+$font-size-basic: 100%;
+$font-family-1: 'Merriweather', serif;
+$font-family-2: 'Montserrat', sans-serif;
+
+//
+//	MIXINS
+// ------------------------------------------------------
+
+// Prepocet na hodnoty EM pre responzivny dizajn!!!
+@function em($size, $context: 16) {
+	@return ($size / $context) + em;
+}
+
+@mixin font-size($size, $context: 16) {
+	font-size: em($size, $context);
+}
+
+
+@mixin box-sizing( $value ) {
+	box-sizing: $value;
+}
+
+
+// pre zmenu sirky MAIN bazena v ktorom su dalsie 3 boxy napr: @include main(em(960));
+@mixin main( $width ) {
+	max-width: $width;
+	margin: 0 auto;
+}
+
+// @include clearfix; tento zapis pridat k rodicovskemu elementu class ktory ma floatovane deti
+@mixin clearfix {
+	&:before,
+	&:after { content: " "; display: table; }
+	&:after { clear: both; }
+}
+
+
+// 
+@mixin selection {
+	::-moz-selection { @content; }
+	::-o-selection { @content; }
+	::selection { @content; }
+}
+
+//box-sizing
+
+html { @include box-sizing(border-box); }
+*, *:before, *:after { box-sizing: inherit; }
+
+// vykreslenie hranic elementov
+*{outline: 2px solid yellow;}
+
+// CODE
+
+body {
+    margin: 0 auto;
+    font: {
+        family: $font-family-1;
+        size: $font-size-basic;
+        }
+    line-height: em(26);
+    text-align: center;
+    background-color: $color-bg-page;
+    color: $color-text-dark;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+header {
+    background: url('../img/back_spacecowboy.jpg') center center no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.siteheader {
+    max-width: em(960);
+    height: em(400);
+    margin: 0 auto;
+}
+
+.nav {
+    @include clearfix;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.menu {
+    position: relative;
+    float: right;
+    font: {
+        family: $font-family-2;
+        weight: 700;
+    }
+    text-transform: uppercase;
+    padding: {
+        left: 0;
+    }
+        li {
+            display: inline-block;
+            margin-left: em(20);
+        }
+        a {
+            text-decoration: none;
+            color: $color-text-light;
+        }
+}
+
+main {
+    h1 {
+        margin: 0;
+        padding: em(50) em(100) em(10);
+        font: {
+            size: em(33);
+        }
+    }
+    h2 {
+        margin: 0;
+        font: {
+            size: em(18);
+        }
+    }
+    h1, h2 {
+        color: $color-text-light;
+        text-transform: uppercase;
+        letter-spacing: em(2);
+        line-height: em(20);
+
+        font: {
+            family: $font-family-2;
+        }
+    }
+}
+
+
+
+
+
+
+
+#toggle, .toggle { display: none; }
+
+
+@media only screen and (max-width: em(700)) {
+	.menu { display: none; opacity: 0; width: 100%; position: absolute; right: 0; }
+	.menu > li { display: block; width: 100%; margin: 0; }
+	.menu > li > a { display: block; width: 100%; text-decoration: none; box-sizing: border-box; }
+    .toggle {
+        display: block;
+        position: relative;
+        cursor: pointer; 
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+	#toggle:checked + div .menu { display: block; opacity: 1;}
+}
+
+

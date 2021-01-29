@@ -1,0 +1,375 @@
+//
+// VARIABLES
+// -------------------------------------------------------
+
+$color-bg-page: #fff;
+$color-dark: #222;
+$color-badge: #f55d4b;
+
+$color-light: #ECEFF1;
+$logo-shadow: #aaa;
+
+$font-size-basic: 100%;
+$font-family-1: 'Kumbh Sans', sans-serif;
+$font-family-2: 'Amatic SC', cursive;
+
+//
+//	MIXINS
+// ------------------------------------------------------
+
+// Prepocet na hodnoty EM pre responzivny dizajn!!!
+@function em($size, $context: 16) {
+	@return ($size / $context) + em;
+}
+
+@mixin font-size($size, $context: 16) {
+	font-size: em($size, $context);
+}
+
+// @include clearfix; tento zapis pridat k rodicovskemu elementu class ktory ma floatovane deti
+@mixin clearfix {
+	&:before,
+	&:after { content: " "; display: table; }
+	&:after { clear: both; }
+}
+
+// box-sizing
+@mixin box-sizing( $value ) {
+	box-sizing: $value;
+}
+
+html { @include box-sizing(border-box); }
+*, *:before, *:after { box-sizing: inherit; }
+
+// vykreslenie hranic elementov
+//*{outline: 2px solid black;}
+
+// CODE
+body {
+    margin: 0 auto;
+
+    background-color: $color-bg-page;
+    color: $color-dark;
+
+    font-family: $font-family-1;
+    font-size: $font-size-basic;
+    line-height: em(26);
+
+    text-align: center;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+.pool {
+    display: block;
+    min-height: em(800);
+}
+
+//kontajner kde su ulozene obrazky meniaceho sa pozadia
+//
+.fadecovers {
+	position: absolute;
+	top: 0;
+    left: 0;
+	width: 100%;
+	min-height: em(900);
+	
+    overflow: hidden;
+    z-index: 1;
+}
+
+//nastavenie zobrazovania obrazkov v html class=cover
+.cover {
+	width: em(1920);
+	height: em(1080);
+	position: absolute;
+	top: 0;
+	left: 50%;
+    margin-left: em(-960); 
+}
+
+footer {
+    @include clearfix;
+    z-index: 15;
+    display: block;
+    position: relative;
+    border-top: em(1) solid;
+    font: {
+        size: em(20, 16);
+        family: $font-family-2;
+        transform: uppercase;
+    }
+    color: $color-light;
+    margin: {
+        left: em(20);
+        right: em(20);
+        bottom: 0;
+    }
+    padding: {
+        top: em(10);
+        left: em(20);
+        right: em(20);
+        bottom: 0;
+    }   
+}
+
+.pictlink {
+    float: left;
+    text-decoration: none;
+    color: $color-light
+}
+
+.cvlink {
+    float: right;
+    text-decoration: none;
+    color: $color-light
+}
+
+.btnCV a {
+    display: block;
+    position: absolute;
+    top: em(30);
+    right: em(30);
+    z-index: 8;
+    width: em(40);
+    height: em(40);
+    border-radius: 50%;
+    background: $color-badge;
+    color: $color-light;
+    padding: em(15) em(14) em(25);
+    margin: 0;
+    font: {
+        family: $font-family-2;
+        size: em(40);
+        weight: 700;
+        transform: uppercase;
+    }
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    transform: scale(0.9);
+}
+
+.btnCV a:hover {
+    -webkit-animation: pulse 2.5s infinite;
+            animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.9);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 em(12) rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.9);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+
+
+
+
+
+input {
+    position: absolute;
+    display: none;
+}
+
+img {
+	max-width: 70%;
+    height: auto;
+    padding-top: em(4);
+    background-color: $color-light;
+}
+
+.menu {
+    z-index: 10;
+    position: absolute;
+    top: em(400);
+    left: 50%;
+    margin-left: em(-((64*2)/2));
+    margin-top: em(-((64*2)/2));
+}
+
+.btn {  
+    width: em(64*2);
+    height: em(64*2);
+    
+    border-radius: 50%;
+    background: $color-light;
+
+    position: absolute;
+    overflow: hidden;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 0.3s cubic-bezier( .25, .8, .25, 1 );
+}
+
+.btn:not(:first-child) {
+    opacity: 0;
+    z-index: -2;
+    transition: all .6s cubic-bezier( .87, -.41, .19, .44 );
+}
+
+// top, left for child transition-delay
+%t-l {
+    top: 0;
+    left: 0;
+}
+
+.btn:nth-child(2) {
+    @extend %t-l;
+    transition-delay: 0s;
+}
+
+.btn:nth-child(3) {
+    @extend %t-l;
+    transition-delay: 0.1s;
+}
+
+.btn:nth-child(4) {
+    @extend %t-l;
+    transition-delay: 0.2s;
+}
+
+.btn:nth-child(5) {
+    @extend %t-l;
+    transition-delay: 0.3s;
+}
+
+.btn:nth-child(6) {
+    @extend %t-l;
+    transition-delay: 0.4s;
+}
+
+.btn:nth-child(7) {
+    @extend %t-l;
+    transition-delay: 0.5s;
+}
+
+.btn:nth-child(8) {
+    @extend %t-l;
+    transition-delay: 0.6s;
+}
+
+//input#toggle:checked ~ #show-menu 
+.ic:nth-child(n+1):hover {
+    transform: rotate(-360deg) scale(0.8);
+    box-shadow: 0 0 0.313em #03e9f4,
+                0 0 1.563em #03e9f4,
+                0 0 3.125em #03e9f4,
+                0 0 6.25em #03e9f4;
+}
+
+input#toggle:checked ~ #show-menu .btn:nth-child(2) {
+    top: em(-180);
+    left: em(0);
+    opacity: 1;
+}
+
+input#toggle:checked ~ #show-menu .btn:nth-child(3) {
+    top: em(-112.2281643);
+    left: em(140.7296668);
+    opacity: 1;
+}
+
+input#toggle:checked ~ #show-menu .btn:nth-child(4) {
+    top: em(40.05376811);
+    left: em(175.4870242);
+    opacity: 1;
+}
+
+input#toggle:checked ~ #show-menu .btn:nth-child(5) {
+    top : em(162.1743962);
+    left: em(78.09907304);
+    opacity: 1;
+}
+
+input#toggle:checked ~ #show-menu .btn:nth-child(6) {
+    top: em(162.1743962);
+    left: em(-78.09907304);
+    opacity: 1;
+}
+
+input#toggle:checked ~ #show-menu .btn:nth-child(7) {
+    top: em(40.05376811);
+    left: em(-175.4870242);
+    opacity: 1;
+}
+
+input#toggle:checked ~ #show-menu .btn:nth-child(8) {
+    top: em(-112.2281643);
+    left: em(-140.7296668);
+    opacity: 1;
+}
+
+
+.menuBtn, .closeBtn {
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.closeBtn {
+    transform: translateY(em(50));
+    opacity: 0;
+}
+
+input#toggle:checked ~ #show-menu .btn .menuBtn {
+    transform: translateY(em(-50));
+    opacity: 0;
+}
+
+.cl:hover {
+    transform: scale(0.8);
+}
+
+input#toggle:checked ~ #show-menu .btn .closeBtn {
+    transform: translateY(em(0));
+    opacity: 1;
+}
+
+
+
+@media (max-width: em(700)) {
+    body {
+        font-size: em(14,16);
+    }
+}
+
+@media (max-width: em(550)) {
+    body {
+        font-size: em(10,14);
+    }
+
+    .pool {
+        min-height: em(1000);
+    }
+    
+    //kontajner kde su ulozene obrazky meniaceho sa pozadia
+    //
+    .fadecovers {
+        
+        width: 100%;
+        min-height: em(1080);
+    }
+    
+    //nastavenie zobrazovania obrazkov v html class=cover
+    /*.cover {
+        width: em(1920);
+        height: em(1080);
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: em(-960); 
+    }*/
+}

@@ -1,0 +1,142 @@
+//
+// VARIABLES
+// -------------------------------------------------------
+
+$color-bg-page: #fff;
+$color-bg-dark: #222;
+
+$color-text-light: #fff;
+$color-text-dark: #222;
+
+$font-size-basic: 100%;
+$font-family-1: 'Kumbh Sans', sans-serif;
+$font-family-2: 'Source Sans Pro', sans-serif;
+$font-family-3: 'Raleway', sans-serif;
+
+
+//
+//	MIXINS
+// ------------------------------------------------------
+
+// Prepocet na hodnoty EM pre responzivny dizajn!!!
+@function em($size, $context: 16) {
+	@return ($size / $context) + em;
+}
+
+@mixin font-size($size, $context: 16) {
+	font-size: em($size, $context);
+}
+
+// ----- BOX-SIZING -----
+@mixin box-sizing( $value ) {
+	box-sizing: $value;
+}
+
+// @include clearfix; tento zapis pridat k rodicovskemu elementu class ktory ma FLOAT-ovane deti
+@mixin clearfix {
+	&:before,
+	&:after { content: " "; display: table; }
+	&:after { clear: both; }
+}
+
+// ----- piuzitie mixinu BOX-SIZING -----
+html { 
+    @include box-sizing(border-box); 
+}
+*, *:before, *:after { box-sizing: inherit; }
+
+// vykreslenie hranic elementov
+
+/*{outline: 2px solid black;}*/
+
+// CODE
+
+body {
+    margin: 0 auto;
+    background-color: $color-bg-page;
+        font: {
+            family: $font-family-3;
+            size: $font-size-basic;
+        }
+    line-height: em(26);
+    text-align: center;
+    overflow-x: hidden;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    margin: 0 auto;
+    max-width: em(960);
+    min-height: em(550);
+}
+
+div {
+    margin: em(0) auto;
+    position: relative;
+}
+
+span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: em(100);
+    height: em(600);
+        a {
+            font-size: em(80);
+            background-color:  $color-bg-dark;
+            color: $color-text-light;
+            border: em(7, 80) solid $color-text-dark;
+            border-radius: 50%;
+            text-decoration: none;
+            padding: {
+                left: em(16, 80);
+                right: em(16, 80);
+                bottom: em(5, 80);
+            }
+                &:hover {
+                    background-color: $color-bg-page;
+                    color: $color-text-dark;
+                    transition: all 1.3s linear;
+                    border: em(7, 80) solid $color-text-dark;
+                }
+        }
+}
+
+.symb {
+    position: absolute;
+    top: em(70);
+    left: 50%;
+    margin-left: -40px;
+}
+
+.symb_deg {
+    transform: rotate((360deg/7));
+}
+
+$circle-shadow: (
+    'web1': #ff69b4,
+    'web2': #39ae90,
+    'web3': #019dcd,
+    'web4': #fd685B,
+    'web5': #8fd2d1,
+    'web6': #ffd256,
+    'web7': #03e9f4,
+);
+
+@each $circle, $color in $circle-shadow {
+    .#{$circle} a:hover {
+        box-shadow: 0 0 0.313em $color,
+                0 0 1.563em $color,
+                0 0 3.125em $color,
+                0 0 6.25em $color;
+        transition: all 1s linear;
+    }
+}
+
+
+footer {
+    margin-top: em(200);
+}
