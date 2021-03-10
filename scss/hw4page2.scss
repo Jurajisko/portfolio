@@ -457,7 +457,14 @@ footer {
 
 
 
-@media only screen and (max-width: em(480)) {
+@media only screen and (max-width: em(500)) {
+    .topic {
+        margin: {
+            top: em(240, 50);
+            bottom: em(40, 50);
+            }
+    }
+
     .snow {
         top: em(930);        
     }
